@@ -1,6 +1,7 @@
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { envs } from './config/envs';
 
 async function bootstrap() {
   const logger = new Logger('Main-Gateway');
@@ -8,7 +9,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
 
-  await app.listen(process.env.PORT ?? 3000);
-  logger.log(`Main Gateway is running on port ${process.env.PORT ?? 3000}`);
+  await app.listen(envs.port);
+  logger.log(`Main Gateway is running on port ${envs.port}`);
 }
 bootstrap();
